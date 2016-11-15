@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Game {
 	
-	private final static boolean[][][]
+	public final static boolean[][][]
 	pieces = {
 		{{true}}, // the one-cell dot.
 		{{true},{true}}, // the two-cell vertical line
@@ -17,7 +20,9 @@ public class Game {
 
 
 	private Board b;
-	private boolean[][][] piecesInPlay;	
+	private boolean[][][] piecesInPlay;
+
+	private static final Scanner in = new Scanner(System.in);
 
 	public Game() {
 		System.out.println("Game initialized");
@@ -27,17 +32,16 @@ public class Game {
 
 	public void play() {
 		while(!gameOver()) {
-			; // do something!
+			
 		}
 	}
 
 	/* returns TRUE if game is over, if no pieces
 		are playable. */
 	private boolean gameOver() {
-		for (boolean[][] p : piecesInPlay) {
-			if (board.getAvailableSpots(p).length != 0)
+		for (boolean[][] p : piecesInPlay)
+			if ( !b.getAvailableSpots(p).isEmpty() )
 				return false;
-		}
 		return true;
 	}
 }
