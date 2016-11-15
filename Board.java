@@ -68,6 +68,15 @@ public class Board {
 		return results;
 	}
 
+	/* assumes that the piece is being inserted in a valid place.*/
+	public void placePiece(boolean[][] piece, Coordinate c) {
+		for (int i = 0; i < piece.length; i++) {
+			for (int j = 0; j < piece[0].length; j++) {
+				board[c.row+i][c.col+j] = board[c.row+i][c.col+j] || piece[i][j];	
+			}
+		}
+	}
+
 	public String toString() {
 		
 		String ret = "";
