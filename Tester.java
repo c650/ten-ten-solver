@@ -5,7 +5,11 @@ public class Tester {
 		Board b = new Board();
 		System.out.println(b);
 	
-		for (boolean[][] testpiece : Game.pieces)	
+		for (Piece testpiece : Game.pieces) {
+			
+			System.out.println(testpiece);
 			System.out.println(b.getAvailableSpots(testpiece));
+			
+		}
 	}
 }

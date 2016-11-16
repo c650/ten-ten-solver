@@ -89,7 +89,13 @@ public class Board {
 		return ret;
 	}
 
+	public void placePiece(Piece p, Coordinate c) {
+		placePiece(p.raw , c);
+	}
 
+	public ArrayList<Coordinate> getAvailableSpots(Piece p) {
+		return getAvailableSpots(p.raw);
+	}
 
 
 

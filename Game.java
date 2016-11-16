@@ -3,8 +3,9 @@ import java.util.Scanner;
 
 public class Game {
 	
+
 	public final static boolean[][][]
-	pieces = {
+	piecesRaw = {
 		{{true}}, // the one-cell dot.
 		{{true},{true}}, // the two-cell vertical line
 		{{true,true}}, // the two-cell horizontal line
@@ -14,10 +15,22 @@ public class Game {
 		{{true,false},{true,true}}, // BL three-cell corner
 		{{true,true},{false,true}}, // TR three-cell corner
 		{{true,true},{true,false}}, // TL three-cell corner
-		/* TODO: rest of pieces. */
 
 	};
 
+
+	public final static Piece[]
+	pieces = {
+		new Piece(piecesRaw[0]),
+		new Piece(piecesRaw[1]),
+		new Piece(piecesRaw[2]),
+		new Piece(piecesRaw[3]),
+		new Piece(piecesRaw[4]),
+		new Piece(piecesRaw[5]),
+		new Piece(piecesRaw[6]),
+		new Piece(piecesRaw[7]),
+		new Piece(piecesRaw[8]),
+	};
 
 	private Board b;
 	private boolean[][][] piecesInPlay;
