@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Game {
 	
-
+/* press 'v' in Vim to highlight */
 	public final static boolean[][][]
 	piecesRaw = {
 		{{true}}, // the one-cell dot.
