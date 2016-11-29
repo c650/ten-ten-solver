@@ -1,8 +1,11 @@
+import java.util.*;
+import java.lang.Thread;
 public class Tester {
+
 	public static void main(String[] args) {
 
-		//Game g = new Game();
-		Board b = new Board();
+		Game g = new Game();
+	/*	Board b = new Board();
 		System.out.println(b);
 	
 		for (Piece testpiece : Game.pieces) {
@@ -10,6 +13,20 @@ public class Tester {
 			System.out.println(testpiece);
 			System.out.println(b.getAvailableSpots(testpiece));
 			
+		}*/
+		ArrayList<Integer> scores = new ArrayList<>();
+		int i = 10000;
+		while(i-->0) {
+			System.out.println("trial#"+i);
+			scores.add(g.play());
+			g.reset();
+			try{
+				Thread.sleep(500);
+			} catch (Exception e) {
+				System.out.println("lol ok");
+			}
 		}
+	
+		Collections.sort(scores);
 	}
 }

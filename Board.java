@@ -8,6 +8,10 @@ public class Board {
 		board = new boolean[10][10];
 	}
 
+	public void clear() {	
+		board = new boolean[10][10];
+	}
+
 	public int scanAndClear() {
 		int cleared = 0;
 		boolean clearableRows[], clearableCols[];
@@ -28,15 +32,20 @@ public class Board {
 
 		/* CLEAR all clearable rows */
 		for (int i = 0, j = 0 ; i < clearableRows.length ; i++)
-			if (clearableRows[i])
-				for (j = 0 ; j < board[i].length ; i++)
+			if (clearableRows[i]) {
+				for (j = 0 ; j < board[i].length ; j++)
 					board[i][j] = false;
+				System.out.println("Clearing Row #" + (i+1));
+			}
 
 		/* CLEAR all clearable columns. */
-		for (int i = 0, j = 0 ; j < clearableCols.length ; i++)
-			if (clearableCols[i])
+		for (int i = 0, j = 0 ; i < clearableCols.length ; i++)
+			if (clearableCols[i]) {
 				for (j = 0 ; j < board.length ; j++)
 					board[j][i] = false;
+				
+				System.out.println("Clearing Col #" + (i+1));
+			}
 
 		return cleared;
 		/* TODO: ensure that intersecting fields do not affect score
@@ -96,19 +105,4 @@ public class Board {
 	public ArrayList<Coordinate> getAvailableSpots(Piece p) {
 		return getAvailableSpots(p.raw);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
