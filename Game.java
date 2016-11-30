@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
-	
+
 /* press 'v' in Vim to highlight */
 	public final static boolean[][][]
 	piecesRaw = {
@@ -52,25 +52,22 @@ public class Game {
 	}
 
 	public int play() {
-		do {
+		for(;;) {
 			if (piecesInPlay.isEmpty()) {
 				int i = 3;
 				while(i-->0)
 					piecesInPlay.add(pieces[(int)(Math.random() * pieces.length)]);
 			}
+			if (gameOver()) break;
 
-//			System.out.println(b);
-			
 			int pieceIdx = pickPiece(); //assume pickPiece validates
 			ArrayList<Coordinate> spots = b.getAvailableSpots(piecesInPlay.get(pieceIdx));
 			//listArr(spots);
-			
+
 			b.placePiece(piecesInPlay.remove(pieceIdx),spots.get((int)(Math.random() * spots.size())));
-		
-			score += b.scanAndClear();	
-//			System.out.println(b);
-			
-		} while(!gameOver());
+
+			score += b.scanAndClear();
+		}
 		System.out.println("Total Score: " + score);
 
 		return score;
@@ -88,10 +85,10 @@ public class Game {
 	private void listArr(ArrayList<Coordinate> spots) {
 		for (int i = 0; i < spots.size(); i++) {
 			System.out.print(spots.get(i) + "\t");
-			if (i % 3 == 2) System.out.println(); 
+			if (i % 3 == 2) System.out.println();
 		}
 	}
-	
+
 	private int pickPiece() {
 		/*for (Piece p : piecesInPlay)
 			System.out.println(p);*/
