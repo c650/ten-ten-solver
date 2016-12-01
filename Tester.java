@@ -4,7 +4,12 @@ public class Tester {
 
 	public static void main(String[] args) {
 
-		Game g = new Game();
+		if (args.length != 1) {
+			System.err.println("Incorrect # of args.");
+			return;
+		}
+
+		Game g = new Game(args[0]);
 	/*	Board b = new Board();
 		System.out.println(b);
 

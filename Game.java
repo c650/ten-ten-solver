@@ -1,48 +1,27 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Game {
 
-/* press 'v' in Vim to highlight */
-	public final static boolean[][][]
-	piecesRaw = {
-		{{true}}, // the one-cell dot.
-		{{true},{true}}, // the two-cell vertical line
-		{{true,true}}, // the two-cell horizontal line
-		{{true},{true},{true}}, // the three-cell vertical line
-		{{true,true,true}}, // three-cell horizontal line
-		{{false,true},{true,true}}, // BR three-cell corner
-		{{true,false},{true,true}}, // BL three-cell corner
-		{{true,true},{false,true}}, // TR three-cell corner
-		{{true,true},{true,false}}, // TL three-cell corner
-
-	};
-
-
-	public final static Piece[]
-	pieces = {
-		new Piece(piecesRaw[0]),
-		new Piece(piecesRaw[1]),
-		new Piece(piecesRaw[2]),
-		new Piece(piecesRaw[3]),
-		new Piece(piecesRaw[4]),
-		new Piece(piecesRaw[5]),
-		new Piece(piecesRaw[6]),
-		new Piece(piecesRaw[7]),
-		new Piece(piecesRaw[8]),
-	};
+	private static Piece[] pieces;
 
 	private Board b;
 	private ArrayList<Piece> piecesInPlay;
-
-	private static final Scanner in = new Scanner(System.in);
 
 	private int score = 0;
 
 	public Game() {
 		System.out.println("Game initialized");
+
 		b = new Board();
 		piecesInPlay = new ArrayList<Piece>();
+	}
+
+	public Game(String pFP) {
+		this();
+		loadPieces(pFP);
 	}
 
 	public void reset() {
@@ -52,6 +31,10 @@ public class Game {
 	}
 
 	public int play() {
+		if (pieces == null) {
+			System.err.println("No pieces supplied.");
+			System.exit(1);
+		}
 		for(;;) {
 			if (piecesInPlay.isEmpty()) {
 				int i = 3;
@@ -98,6 +81,50 @@ public class Game {
 			rand = (int)(Math.random() * piecesInPlay.size());
 
 		return rand;
+	}
+
+	private void loadPieces(String pieceFilePath) {
+		Scanner in = null;
+		try {
+			in = new Scanner(new File(pieceFilePath));
+		} catch (FileNotFoundException e) {
+			System.err.println("Couldn't find file " + pieceFilePath);
+			System.exit(1);
+		}
+		if (in == null)
+			return;
+		/*
+			We will expect the file to start with one number.
+			This number denotes the number of pieces to read in.
+			Each piece will consist of two numbers r and c, how
+			many rows and columns a piece needs, respectively.
+			Each piece will consist of *'s and any other character
+			set up as a matrix.
+		*/
+		int nRead = in.nextInt();
+		System.out.println("Reading in " + nRead + " pieces...");
+		pieces = new Piece[nRead];
+		boolean[][] tmpSpace;
+		String tmpStr;
+		for (int i = 0,r,c; i < nRead; i++) {
+			System.out.println(i);
+			r = in.nextInt();
+			c = in.nextInt();
+			System.out.printf("r = %d and c = %d",r,c);
+			tmpSpace = new boolean[r][c];
+
+			for (int j = 0; j < tmpSpace.length; j++) {
+
+				tmpStr = in.nextLine();
+				for (int k = 0; k < tmpSpace[j].length; k++)
+					tmpSpace[j][k] = k < tmpStr.length() && tmpStr.charAt(k) == '*';
+
+			}
+
+			pieces[i] = new Piece(tmpSpace);
+			tmpSpace = null;
+
+		}
 	}
 
 }
