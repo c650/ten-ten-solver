@@ -106,18 +106,22 @@ public class Game {
 		pieces = new Piece[nRead];
 		boolean[][] tmpSpace;
 		String tmpStr;
-		for (int i = 0,r,c; i < nRead; i++) {
-			System.out.println(i);
+
+		for (int i = 0,r=0,c=0,j=0,k=0; i < nRead; i++) {
+
 			r = in.nextInt();
 			c = in.nextInt();
-			System.out.printf("r = %d and c = %d",r,c);
+
+			// System.out.printf("r = %d and c = %d",r,c);
 			tmpSpace = new boolean[r][c];
 
-			for (int j = 0; j < tmpSpace.length; j++) {
+			tmpStr = in.nextLine();
+			for (j = 0; j < r; j++) {
+
+				for (k = 0; k < c; k++)
+					tmpSpace[j][k] = k < tmpStr.length() && tmpStr.charAt(k) == '*';
 
 				tmpStr = in.nextLine();
-				for (int k = 0; k < tmpSpace[j].length; k++)
-					tmpSpace[j][k] = k < tmpStr.length() && tmpStr.charAt(k) == '*';
 
 			}
 
