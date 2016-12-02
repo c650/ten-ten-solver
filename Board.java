@@ -2,14 +2,23 @@ import java.util.ArrayList;
 
 public class Board {
 	private boolean[][] board;
+	private final boolean DEBUG;
 
 	public Board() {
 		/* board will always be a square. */
 		board = new boolean[10][10];
+		DEBUG = false;
 	}
 
-	public void clear() {	
+	public Board(boolean dbg) {
 		board = new boolean[10][10];
+		DEBUG = true;
+	}
+
+	public void clear() {
+		for (int i = 0, j = 0; i < board.length; i++)
+			for (j = 0; j < board[i].length; j++)
+				board[i][j] = false;
 	}
 
 	public int scanAndClear() {
@@ -21,7 +30,7 @@ public class Board {
 		/* Loop thru each row and validate.	*/
 		for (int i = 0, j = 0 ; i < board.length ; i++) {
 			clearableRows[i] = clearableCols[i]  = true;
-			
+
 			for (j = 0; j < board[i].length ; j++) {
 				clearableRows[i] = clearableRows[i] && board[i][j];
 				clearableCols[i] = clearableCols[i] && board[j][i];
@@ -35,7 +44,7 @@ public class Board {
 			if (clearableRows[i]) {
 				for (j = 0 ; j < board[i].length ; j++)
 					board[i][j] = false;
-				System.out.println("Clearing Row #" + (i+1));
+				debug("Clearing Row #" + (i+1));
 			}
 
 		/* CLEAR all clearable columns. */
@@ -43,8 +52,8 @@ public class Board {
 			if (clearableCols[i]) {
 				for (j = 0 ; j < board.length ; j++)
 					board[j][i] = false;
-				
-				System.out.println("Clearing Col #" + (i+1));
+
+				debug("Clearing Col #" + (i+1));
 			}
 
 		return cleared;
@@ -71,7 +80,7 @@ public class Board {
 
 				if (works)
 					results.add(new Coordinate( i , j ) );
-				
+
 			}
 		}
 		return results;
@@ -81,13 +90,13 @@ public class Board {
 	public void placePiece(boolean[][] piece, Coordinate c) {
 		for (int i = 0; i < piece.length; i++) {
 			for (int j = 0; j < piece[0].length; j++) {
-				board[c.row+i][c.col+j] = board[c.row+i][c.col+j] || piece[i][j];	
+				board[c.row+i][c.col+j] = board[c.row+i][c.col+j] || piece[i][j];
 			}
 		}
 	}
 
 	public String toString() {
-		
+
 		String ret = "";
 		for (boolean[] arr : board) {
 			ret += "| ";
@@ -104,5 +113,10 @@ public class Board {
 
 	public ArrayList<Coordinate> getAvailableSpots(Piece p) {
 		return getAvailableSpots(p.raw);
+	}
+
+	private void debug(String s) {
+		if (DEBUG)
+			System.out.println(s);
 	}
 }

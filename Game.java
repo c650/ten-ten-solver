@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Game {
-
+	private final boolean DEBUG;
 	private static Piece[] pieces;
 
 	private Board b;
@@ -13,15 +13,24 @@ public class Game {
 	private int score = 0;
 
 	public Game() {
-		System.out.println("Game initialized");
-
-		b = new Board();
-		piecesInPlay = new ArrayList<Piece>();
+		this("", false);
 	}
 
 	public Game(String pFP) {
-		this();
+		this(pFP, false);
+	}
+
+	public Game(String pFP, boolean debug) {
+
+		DEBUG = debug;
+
+		b = new Board();
+		piecesInPlay = new ArrayList<Piece>();
+
 		loadPieces(pFP);
+
+		debug("Game initialized");
+
 	}
 
 	public void reset() {
@@ -45,7 +54,8 @@ public class Game {
 
 			int pieceIdx = pickPiece(); //assume pickPiece validates
 			ArrayList<Coordinate> spots = b.getAvailableSpots(piecesInPlay.get(pieceIdx));
-			//listArr(spots);
+
+			// listArr(spots);
 
 			b.placePiece(piecesInPlay.remove(pieceIdx),spots.get((int)(Math.random() * spots.size())));
 
@@ -73,8 +83,8 @@ public class Game {
 	}
 
 	private int pickPiece() {
-		/*for (Piece p : piecesInPlay)
-			System.out.println(p);*/
+		// for (Piece p : piecesInPlay)
+		// 	debug(p.toString());
 
 		int rand = (int)(Math.random() * piecesInPlay.size());
 		while(b.getAvailableSpots(piecesInPlay.get(rand)).isEmpty())
@@ -84,6 +94,8 @@ public class Game {
 	}
 
 	private void loadPieces(String pieceFilePath) {
+		if (pieces != null) return;
+
 		Scanner in = null;
 		try {
 			in = new Scanner(new File(pieceFilePath));
@@ -102,7 +114,7 @@ public class Game {
 			set up as a matrix.
 		*/
 		int nRead = in.nextInt();
-		System.out.println("Reading in " + nRead + " pieces...");
+		debug("Reading in " + nRead + " pieces...");
 		pieces = new Piece[nRead];
 		boolean[][] tmpSpace;
 		String tmpStr;
@@ -112,23 +124,25 @@ public class Game {
 			r = in.nextInt();
 			c = in.nextInt();
 
-			// System.out.printf("r = %d and c = %d",r,c);
 			tmpSpace = new boolean[r][c];
 
-			tmpStr = in.nextLine();
+
 			for (j = 0; j < r; j++) {
-
+				tmpStr = in.next();
 				for (k = 0; k < c; k++)
-					tmpSpace[j][k] = k < tmpStr.length() && tmpStr.charAt(k) == '*';
-
-				tmpStr = in.nextLine();
-
+					tmpSpace[j][k] = tmpStr.charAt(k) == '*';
 			}
 
 			pieces[i] = new Piece(tmpSpace);
+			debug("Loaded: \n" + pieces[i]);
 			tmpSpace = null;
 
 		}
+	}
+
+	private void debug(String s) {
+		if (DEBUG)
+			System.out.println(s);
 	}
 
 }

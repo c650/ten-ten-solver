@@ -9,7 +9,7 @@ public class Tester {
 			return;
 		}
 
-		Game g = new Game(args[0]);
+		Game g = new Game(args[0], true);
 	/*	Board b = new Board();
 		System.out.println(b);
 
