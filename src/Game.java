@@ -17,7 +17,7 @@ public class Game {
 	}
 
 	public Game(String pFP) {
-		this(pFP, false);
+		this(pFP, true);
 	}
 
 	public Game(String pFP, boolean debug) {
@@ -50,6 +50,7 @@ public class Game {
 				while(i-->0)
 					piecesInPlay.add(pieces[(int)(Math.random() * pieces.length)]);
 			}
+			System.out.println(b);
 			if (gameOver()) break;
 
 			int pieceIdx = pickPiece(); //assume pickPiece validates
