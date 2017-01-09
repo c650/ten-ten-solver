@@ -10,17 +10,19 @@ public class Game {
 	private Board b;
 	private ArrayList<Piece> piecesInPlay;
 
+	private Solution sol;
+
 	private int score = 0;
 
-	public Game() {
-		this("", false);
+	public Game(Solution s) {
+		this(s, "", false);
 	}
 
-	public Game(String pFP) {
-		this(pFP, false);
+	public Game(Solution s, String pFP) {
+		this(s, pFP, false);
 	}
 
-	public Game(String pFP, boolean debug) {
+	public Game(Solution s, String pFP, boolean debug) {
 
 		DEBUG = debug;
 
@@ -28,6 +30,9 @@ public class Game {
 		piecesInPlay = new ArrayList<Piece>();
 
 		loadPieces(pFP);
+
+		sol = s;
+		sol.setBoard(b);
 
 		debug("Game initialized");
 
@@ -44,7 +49,8 @@ public class Game {
 			System.err.println("No pieces supplied.");
 			System.exit(1);
 		}
-		for(;;) {
+
+		while(true) {
 			if (piecesInPlay.isEmpty()) {
 				int i = 3;
 				while(i-->0)
@@ -52,12 +58,12 @@ public class Game {
 			}
 			if (gameOver()) break;
 
-			int pieceIdx = pickPiece(); //assume pickPiece validates
-			ArrayList<Coordinate> spots = b.getAvailableSpots(piecesInPlay.get(pieceIdx));
-
-			// listArr(spots);
-
-			b.placePiece(piecesInPlay.remove(pieceIdx),spots.get((int)(Math.random() * spots.size())));
+			/*	The subclass of Solution will handle this!
+				You'll implement your own .doMove(...) with
+				your choice of logic and/or randomness to
+				solve the puzzle!
+			*/
+			sol.doMove( piecesInPlay );
 
 			score += b.scanAndClear();
 		}
@@ -80,17 +86,6 @@ public class Game {
 			System.out.print(spots.get(i) + "\t");
 			if (i % 3 == 2) System.out.println();
 		}
-	}
-
-	private int pickPiece() {
-		// for (Piece p : piecesInPlay)
-		// 	debug(p.toString());
-
-		int rand = (int)(Math.random() * piecesInPlay.size());
-		while(b.getAvailableSpots(piecesInPlay.get(rand)).isEmpty())
-			rand = (int)(Math.random() * piecesInPlay.size());
-
-		return rand;
 	}
 
 	private void loadPieces(String pieceFilePath) {

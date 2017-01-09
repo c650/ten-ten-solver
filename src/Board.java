@@ -5,12 +5,11 @@ public class Board {
 	private final boolean DEBUG;
 
 	public Board() {
-		/* board will always be a square. */
-		board = new boolean[10][10];
-		DEBUG = false;
+		this(false);
 	}
 
 	public Board(boolean dbg) {
+		/* board will always be a square. */
 		board = new boolean[10][10];
 		DEBUG = true;
 	}

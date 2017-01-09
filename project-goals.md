@@ -6,7 +6,4 @@ If you cannot insert _any_ piece you have, the game ends.
 
 * Scanning for clearable fields: Done.
 * Load and provide pieces: Done.
-* Find empty spaces where pieces will fit: Done.
-* 
-
-TODO: Allow for pieces to be read from a file. 
+* Find empty spaces where pieces will fit: Done
