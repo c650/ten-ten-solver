@@ -56,6 +56,7 @@ public class Game {
 				while(i-->0)
 					piecesInPlay.add(pieces[(int)(Math.random() * pieces.length)]);
 			}
+			System.out.println(b);
 			if (gameOver()) break;
 
 			/*	The subclass of Solution will handle this!
