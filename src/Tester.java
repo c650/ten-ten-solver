@@ -10,7 +10,7 @@ public class Tester {
 			return;
 		}
 
-		Game g = new Game(new MySolution(), args[0], true);
+		Game g = new Game(new AdjacencySolution(), args[0], true);
 		g.play();
 
 
