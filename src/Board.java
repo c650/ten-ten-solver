@@ -114,6 +114,10 @@ public class Board {
 		return getAvailableSpots(p.raw);
 	}
 
+	public boolean[][] getBoard() {
+		return board;
+	}
+
 	private void debug(String s) {
 		if (DEBUG)
 			System.out.println(s);
