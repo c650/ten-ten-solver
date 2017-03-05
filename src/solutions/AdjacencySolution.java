@@ -50,6 +50,12 @@ public class AdjacencySolution extends Solution {
 					++count;
 			}
 		}
+
+		if (atSpot.row == 0 || atSpot.row + p.raw.length >= rawBoard.length)
+			++count;
+		if (atSpot.col == 0 || atSpot.col + p.raw[0].length >= rawBoard[0].length)
+			++count;
+
 		return count;
 	}
 
