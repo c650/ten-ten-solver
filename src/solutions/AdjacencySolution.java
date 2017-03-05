@@ -4,7 +4,7 @@ public class AdjacencySolution extends Solution {
 
 	public final String name = "MySolution -- Just Random";
 
-	MySolution() {
+	AdjacencySolution() {
 		super();
 	}
 
@@ -17,24 +17,40 @@ public class AdjacencySolution extends Solution {
 		for (Piece p : choices) {
 			ArrayList<Coordinate> spots = b.getAvailableSpots(p);
 			for (Coordinate c : spots) {
-				tmp = countCollisions(p, c);
+
+				tmp = countCollisions(p, c, rawBoard);
 				if (tmp > mostCollisions) {
 					bestPiece = p;
 					bestMove = c;
 					mostCollisions = tmp;
 				}
+
 			}
 		}
-
-		b.placePiece( choices.remove(bestPiece), bestMove );
+		choices.remove(bestPiece);
+		b.placePiece( bestPiece , bestMove );
 	}
 
-	private int countCollisions(Piece p, Coordinate atSpot) {
-		int main_row_idx = atSpot.row - 1,
-		    max_main_row = atSpot.row + p.raw.length;
-		for (; main_row_idx < max_main_row; ++main_row_idx) {
+	private int countCollisions(Piece p, Coordinate atSpot, final boolean[][] rawBoard) {
+		int count = 0;
+		for (int i = 0, j, curr_row, curr_col; i < p.raw.length; ++i) {
+			for (j = 0; j < p.raw[i].length; ++j) {
+				if (!p.raw[i][j]) continue; /* skip over empty spots in the piece (just there for square-buffering)*/
 
+				curr_row = atSpot.row + i;
+				curr_col = atSpot.col + j;
+
+				if (curr_row - 1 >= 0 && rawBoard[curr_row-1][curr_col])
+					++count;
+				if (curr_col - 1 >= 0 && rawBoard[curr_row][curr_col-1])
+					++count;
+				if (curr_row + 1 < rawBoard.length && rawBoard[curr_row+1][curr_col])
+					++count;
+				if (curr_col + 1 < rawBoard[curr_row].length && rawBoard[curr_row][curr_col+1])
+					++count;
+			}
 		}
+		return count;
 	}
 
 };
