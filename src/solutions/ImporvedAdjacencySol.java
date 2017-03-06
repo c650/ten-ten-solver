@@ -6,7 +6,7 @@ public class ImporvedAdjacencySol extends Solution{
 
 		ImporvedAdjacencySol() {
 			super();
-		}
+		
 
 		public void doMove(ArrayList<Piece> choices) {
 			final boolean[][] rawBoard = b.getBoard(); /* we're going to scan/traverse the board to count adjacencies. */
