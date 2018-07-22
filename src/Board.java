@@ -1,25 +1,41 @@
 import java.util.ArrayList;
 
+// Javadoc added by Cassandra
+
 public class Board {
 	private boolean[][] board;
 	private final boolean DEBUG;
 
+	/**
+	* Default constructor for Board objects.
+	* Always creates a board with debug turned off.
+	*/
 	public Board() {
 		this(false);
 	}
-
+	
+	/**
+	* Constructor that specifies debug flag.
+	* @param dbg A boolean, dictates whether to print debugging messages or not.
+	*/
 	public Board(boolean dbg) {
 		/* board will always be a square. */
 		board = new boolean[10][10];
-		DEBUG = true;
+		DEBUG = dbg;
 	}
 
+	/**
+	* Clears the board.
+	*/
 	public void clear() {
 		for (int i = 0, j = 0; i < board.length; i++)
 			for (j = 0; j < board[i].length; j++)
 				board[i][j] = false;
 	}
 
+	/**
+	* Scans the board for completed rows and clears them.
+	*/
 	public int scanAndClear() {
 		int cleared = 0;
 		boolean clearableRows[], clearableCols[];
@@ -59,21 +75,32 @@ public class Board {
 		/* TODO: ensure that intersecting fields do not affect score
 			in the wrong whey. */
 	}
-	public ArrayList<Coordinate> getAvailableSpots(boolean[][] piece) {
+	
+	/**
+	* Finds all the locations where a piece can fit.
+	* @param  p A `Piece` object 
+	* @return   An `ArrayList` of `Coordinate` containing all the locations on *this* `Board` the `Piece` "p" can be placed.
+	* @see      Piece
+	* @see      Coordinate
+	*/
+	// replaced all references of a boolean array to the Piece object - cass
+	public ArrayList<Coordinate> getAvailableSpots(Piece p) {
 
 		ArrayList<Coordinate> results = new ArrayList<>();
 
-		for ( int i = 0 ; i < board.length - piece.length + 1; i++  ) {
-			for ( int j = 0 ; j < board[i].length - piece[0].length + 1; j++) {
+		for ( int i = 0 ; i < board.length - p.getRaw.length + 1; i++  ) {
+			for ( int j = 0 ; j < board[i].length - p.getRaw[0].length + 1; j++) {
 				/* so now we can work with each possible upper left corner...*/
 
 				boolean works = true;
-				for (int k = 0 ; k < piece.length && works ; k++ ) {
-					for (int l = 0 ; l < piece[k].length && works; l++) {
+				
+				// made some changes to improve run time. Checking value of a boolean is mildly faster than comparing a value of integers - Cass
+				for (int k = 0 ; works && k <  p.getRaw.length; k++ ) {
+					for (int l = 0 ; works && l <  p.getRaw[k].length; l++) {
 						/* check if there is a block at this cell in piece
 							AND the corresp. block in board is empty, OR the cell
 							in the piece is empty... */
-						works = (piece[k][l] && !board[i+k][j+l]) || !piece[k][l];
+						works = (p.getRaw[k][l] && !board[i+k][j+l]) || !p.getRaw[k][l];
 					}
 				}
 
@@ -84,16 +111,27 @@ public class Board {
 		}
 		return results;
 	}
-
+	
+	/**
+	* Places a `Piece` "p" on *this* `Board` at `Coordinate` "c"
+	* @param p The `Piece` to be played
+	* @param c The `Coordinate` to play at
+	*/
 	/* assumes that the piece is being inserted in a valid place.*/
-	public void placePiece(boolean[][] piece, Coordinate c) {
-		for (int i = 0; i < piece.length; i++) {
-			for (int j = 0; j < piece[0].length; j++) {
-				board[c.row+i][c.col+j] = board[c.row+i][c.col+j] || piece[i][j];
+	// replaced all references of a boolean array to the Piece object - Cass
+	public void placePiece(Piece p, Coordinate c) {
+		for (int i = 0; i < p.getRaw.length; i++) {
+			for (int j = 0; j < p.getRaw[0].length; j++) {
+				board[c.row+i][c.col+j] = board[c.row+i][c.col+j] || p.getRaw[i][j];
 			}
 		}
 	}
 
+	/**
+	* Returns a `String` representation of *this* `Board`
+	* Overriden from parent *class* `Object`
+	* @return a `String` representation of *this* `Board`
+	*/
 	public String toString() {
 
 		String ret = "";
@@ -105,21 +143,34 @@ public class Board {
 		}
 		return ret;
 	}
-
-	public void placePiece(Piece p, Coordinate c) {
-		placePiece(p.raw , c);
-	}
-
-	public ArrayList<Coordinate> getAvailableSpots(Piece p) {
-		return getAvailableSpots(p.raw);
-	}
-
+	
+	/**
+	* Passes the 2D boolean array of the board by reference
+	* @return the 2D boolean array of the board
+	*/
 	public boolean[][] getBoard() {
 		return board;
 	}
 
+	/**
+	* Prints a string if debug is turned on
+	* @param s The string to be printed
+	*/
 	private void debug(String s) {
 		if (DEBUG)
 			System.out.println(s);
+	}
+	
+	/**
+	* copies the board's values, while creating a new object reference
+	*/
+	public boolean[][] copyBoard() {
+		Board result = new Board();
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[i].length; j++) {
+				result[i][j]=board[i][j];
+			}
+		}
+		return result;
 	}
 }
