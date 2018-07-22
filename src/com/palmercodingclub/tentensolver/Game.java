@@ -1,12 +1,14 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+package com.palmercodingclub.tentensolver;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
 	private final boolean DEBUG;
 	private static Piece[] pieces;
-
+	private Random rng;
 	private Board b;
 	private ArrayList<Piece> piecesInPlay;
 
@@ -19,7 +21,7 @@ public class Game {
 	* @param s which solution class to use
 	*/
 	public Game(Solution s) {
-		this(s, "", false);
+		this(s, "", false,-1);
 	}
 
 	/**
@@ -28,7 +30,7 @@ public class Game {
 	* @param pFP the file where the `Piece` info is stored
 	*/
 	public Game(Solution s, String pFP) {
-		this(s, pFP, false);
+		this(s, pFP, false,-1);
 	}
 	
 	/**
@@ -37,7 +39,11 @@ public class Game {
 	* @param debug a boolean, dictates whether to print debugging messages or not.
 	*/
 	public Game(Solution s, boolean debug) {
-		this(s, "", debug);
+		this(s, "", debug,-1);
+	}
+	
+	public Game(Solution s, String pFP, boolean debug) {
+		this(s, pFP, debug,-1);
 	}
 	
 	/**
@@ -46,7 +52,7 @@ public class Game {
 	* @param pFP   the file where the `Piece` info is stored
 	* @param debug a boolean, dictates whether to print debugging messages or not.
 	*/
-	public Game(Solution s, String pFP, boolean debug) {
+	public Game(Solution s, String pFP, boolean debug, long seed) {
 
 		DEBUG = debug;
 
@@ -59,6 +65,13 @@ public class Game {
 		sol.setBoard(b);
 
 		debug("Game initialized");
+		
+		if (seed==-1) {
+			rng = new Random();
+		}
+		else {
+			rng = new Random(seed);
+		}
 
 	}
 
@@ -84,7 +97,7 @@ public class Game {
 			if (piecesInPlay.isEmpty()) {
 				int i = 3;
 				while(i-->0)
-					piecesInPlay.add(pieces[(int)(Math.random() * pieces.length)]);
+					piecesInPlay.add(pieces[(int)(rng.nextInt(pieces.length))]);
 			}
 			System.out.println(b);
 			if (gameOver()) break;
@@ -182,6 +195,10 @@ public class Game {
 	private void debug(String s) {
 		if (DEBUG)
 			System.out.println(s);
+	}
+	
+	public int getScore() {
+		return score;
 	}
 
 }

@@ -1,12 +1,13 @@
+package com.palmercodingclub.tentensolver.solutions;
 import java.util.ArrayList;
+import com.palmercodingclub.tentensolver.*;
 
 public class ImporvedAdjacencySol extends Solution{
 	
-		public final String name = "MySolution -- Just Random";
 
-		ImporvedAdjacencySol() {
-			super();
-		
+		public ImporvedAdjacencySol() {
+			super("ImprovedAdjacencySolution");
+		}
 
 		public void doMove(ArrayList<Piece> choices) {
 			final boolean[][] rawBoard = b.getBoard(); /* we're going to scan/traverse the board to count adjacencies. */
@@ -54,9 +55,9 @@ public class ImporvedAdjacencySol extends Solution{
 
 		private int countCollisions(Piece p, Coordinate atSpot, final boolean[][] rawBoard) {
 			int count = 0;
-			for (int i = 0, j, curr_row, curr_col; i < p.raw.length; i++) {
-				for (j = 0; j < p.raw[i].length; j++) {
-					if (!p.raw[i][j]) continue; /* skip over empty spots in the piece (just there for square-buffering)*/
+			for (int i = 0, j, curr_row, curr_col; i < p.getRaw().length; i++) {
+				for (j = 0; j < p.getRaw()[i].length; j++) {
+					if (!p.getRaw()[i][j]) continue; /* skip over empty spots in the piece (just there for square-buffering)*/
 
 					curr_row = atSpot.row + i;
 					curr_col = atSpot.col + j;

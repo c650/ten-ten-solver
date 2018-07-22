@@ -1,13 +1,15 @@
+package com.palmercodingclub.tentensolver;
 import java.util.ArrayList;
 
 public abstract class Solution {
 
-	public final String name = "Generic Solution Abstract Class";
+	public final String name;
 
-	Board b;
-
-	Solution() {
+	protected Board b;
+	
+	protected Solution(String name) {
 		b = null;
+		this.name=name;
 	}
 
 	public void setBoard(Board board) {
@@ -19,6 +21,6 @@ public abstract class Solution {
 	* doMove(...) is the only function that must be implemented.
 	* Note: Valid positions are returned by Board.getAvailableSpots(Piece).
 	*/
-	abstract void doMove(ArrayList<Piece> choices);
+	public abstract void doMove(ArrayList<Piece> choices);
 
 };

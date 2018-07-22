@@ -11,7 +11,7 @@ A framework for developing algorithms to perform efficiently and productively in
 ### Changes Jul 22, 2018:
 
 * Some minor changes to `Board` to improve run speed.
-* 
+* added javadoc comments
 
 
 ### Changes Jan 09, 2017:

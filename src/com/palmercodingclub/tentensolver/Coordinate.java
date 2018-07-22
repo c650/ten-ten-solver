@@ -1,3 +1,4 @@
+package com.palmercodingclub.tentensolver;
 public class Coordinate {
 	public final int row,col;
 	

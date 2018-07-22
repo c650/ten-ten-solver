@@ -1,3 +1,4 @@
+package com.palmercodingclub.tentensolver;
 import java.util.ArrayList;
 
 // Javadoc added by Cassandra
@@ -88,19 +89,19 @@ public class Board {
 
 		ArrayList<Coordinate> results = new ArrayList<>();
 
-		for ( int i = 0 ; i < board.length - p.getRaw.length + 1; i++  ) {
-			for ( int j = 0 ; j < board[i].length - p.getRaw[0].length + 1; j++) {
+		for ( int i = 0 ; i < board.length - p.getRaw().length + 1; i++  ) {
+			for ( int j = 0 ; j < board[i].length - p.getRaw()[0].length + 1; j++) {
 				/* so now we can work with each possible upper left corner...*/
 
 				boolean works = true;
 				
 				// made some changes to improve run time. Checking value of a boolean is mildly faster than comparing a value of integers - Cass
-				for (int k = 0 ; works && k <  p.getRaw.length; k++ ) {
-					for (int l = 0 ; works && l <  p.getRaw[k].length; l++) {
+				for (int k = 0 ; works && k <  p.getRaw().length; k++ ) {
+					for (int l = 0 ; works && l <  p.getRaw()[k].length; l++) {
 						/* check if there is a block at this cell in piece
 							AND the corresp. block in board is empty, OR the cell
 							in the piece is empty... */
-						works = (p.getRaw[k][l] && !board[i+k][j+l]) || !p.getRaw[k][l];
+						works = (p.getRaw()[k][l] && !board[i+k][j+l]) || !p.getRaw()[k][l];
 					}
 				}
 
@@ -120,9 +121,9 @@ public class Board {
 	/* assumes that the piece is being inserted in a valid place.*/
 	// replaced all references of a boolean array to the Piece object - Cass
 	public void placePiece(Piece p, Coordinate c) {
-		for (int i = 0; i < p.getRaw.length; i++) {
-			for (int j = 0; j < p.getRaw[0].length; j++) {
-				board[c.row+i][c.col+j] = board[c.row+i][c.col+j] || p.getRaw[i][j];
+		for (int i = 0; i < p.getRaw().length; i++) {
+			for (int j = 0; j < p.getRaw()[0].length; j++) {
+				board[c.row+i][c.col+j] = board[c.row+i][c.col+j] || p.getRaw()[i][j];
 			}
 		}
 	}
@@ -164,11 +165,11 @@ public class Board {
 	/**
 	* copies the board's values, while creating a new object reference
 	*/
-	public boolean[][] copyBoard() {
+	public Board copyBoard() {
 		Board result = new Board();
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
-				result[i][j]=board[i][j];
+				result.board[i][j]=board[i][j];
 			}
 		}
 		return result;
