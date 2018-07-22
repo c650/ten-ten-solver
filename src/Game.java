@@ -14,14 +14,38 @@ public class Game {
 
 	private int score = 0;
 
+	/**
+	* This constructor assums no file for the pieces, and has debug turned off.
+	* @param s which solution class to use
+	*/
 	public Game(Solution s) {
 		this(s, "", false);
 	}
 
+	/**
+	* This constructor has debug turned off.
+	* @param s   which solution class to use
+	* @param pFP the file where the `Piece` info is stored
+	*/
 	public Game(Solution s, String pFP) {
 		this(s, pFP, false);
 	}
-
+	
+	/**
+	* This constructor has debug turned off.
+	* @param s     which solution class to use
+	* @param debug a boolean, dictates whether to print debugging messages or not.
+	*/
+	public Game(Solution s, boolean debug) {
+		this(s, "", debug);
+	}
+	
+	/**
+	* This constructor makes no assumptions and is called by the other constructors.
+	* @param s     which solution class to use
+	* @param pFP   the file where the `Piece` info is stored
+	* @param debug a boolean, dictates whether to print debugging messages or not.
+	*/
 	public Game(Solution s, String pFP, boolean debug) {
 
 		DEBUG = debug;
@@ -38,12 +62,18 @@ public class Game {
 
 	}
 
+	/**
+	* Resets the game for trying again
+	*/
 	public void reset() {
 		b.clear();
 		piecesInPlay.clear();
 		score = 0;
 	}
 
+	/**
+	* Main logic for the game playing
+	*/
 	public int play() {
 		if (pieces == null) {
 			System.err.println("No pieces supplied.");
@@ -73,8 +103,10 @@ public class Game {
 		return score;
 	}
 
-	/* returns TRUE if game is over, if no pieces
-		are playable. */
+	/**
+	* Checks if the game is finished
+	* @return true if game is over, if no pieces are playable, and false otherwise
+	*/
 	private boolean gameOver() {
 		for (Piece p : piecesInPlay)
 			if ( !b.getAvailableSpots(p).isEmpty() )
@@ -82,6 +114,8 @@ public class Game {
 		return !piecesInPlay.isEmpty();
 	}
 
+	// I'm not sure what this is for. It is currently unused.
+	// Is it for debugging?
 	private void listArr(ArrayList<Coordinate> spots) {
 		for (int i = 0; i < spots.size(); i++) {
 			System.out.print(spots.get(i) + "\t");
@@ -89,6 +123,10 @@ public class Game {
 		}
 	}
 
+	/**
+	* Tries to load the pieces from the file
+	* @param pieceFilePath the location of the piece file
+	*/
 	private void loadPieces(String pieceFilePath) {
 		if (pieces != null) return;
 
@@ -136,6 +174,11 @@ public class Game {
 		}
 	}
 
+	
+	/**
+	* Prints a string if debug is turned on
+	* @param s The string to be printed
+	*/
 	private void debug(String s) {
 		if (DEBUG)
 			System.out.println(s);
