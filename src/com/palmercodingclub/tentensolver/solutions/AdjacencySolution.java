@@ -1,11 +1,13 @@
+package com.palmercodingclub.tentensolver.solutions;
 import java.util.ArrayList;
+
+import com.palmercodingclub.tentensolver.*;
 
 public class AdjacencySolution extends Solution {
 
-	public final String name = "MySolution -- Just Random";
 
-	AdjacencySolution() {
-		super();
+	public AdjacencySolution() {
+		super("AdjacencySolution");
 	}
 
 	public void doMove(ArrayList<Piece> choices) {
@@ -33,9 +35,9 @@ public class AdjacencySolution extends Solution {
 
 	private int countCollisions(Piece p, Coordinate atSpot, final boolean[][] rawBoard) {
 		int count = 0;
-		for (int i = 0, j, curr_row, curr_col; i < p.raw.length; ++i) {
-			for (j = 0; j < p.raw[i].length; ++j) {
-				if (!p.raw[i][j]) continue; /* skip over empty spots in the piece (just there for square-buffering)*/
+		for (int i = 0, j, curr_row, curr_col; i < p.getRaw().length; ++i) {
+			for (j = 0; j < p.getRaw()[i].length; ++j) {
+				if (!p.getRaw()[i][j]) continue; /* skip over empty spots in the piece (just there for square-buffering)*/
 
 				curr_row = atSpot.row + i;
 				curr_col = atSpot.col + j;
@@ -51,12 +53,11 @@ public class AdjacencySolution extends Solution {
 			}
 		}
 
-		if (atSpot.row == 0 || atSpot.row + p.raw.length >= rawBoard.length)
+		if (atSpot.row == 0 || atSpot.row + p.getRaw().length >= rawBoard.length)
 			++count;
-		if (atSpot.col == 0 || atSpot.col + p.raw[0].length >= rawBoard[0].length)
+		if (atSpot.col == 0 || atSpot.col + p.getRaw()[0].length >= rawBoard[0].length)
 			++count;
 
 		return count;
 	}
-
 };

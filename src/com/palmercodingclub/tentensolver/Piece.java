@@ -1,7 +1,8 @@
+package com.palmercodingclub.tentensolver;
 public class Piece {
 
 	/* actual incidence matrix for piece  */
-	public final boolean[][] raw;
+	private final boolean[][] raw;
 
 	public Piece( boolean[][] r  ) {
 		raw = r;
@@ -25,4 +26,12 @@ public class Piece {
 		return ret;
 	}
 
+	/**
+	* Returns the values of the piece without handing over the actual array object
+	*/
+	public boolean[][] getRaw() {
+		boolean[][] result=new boolean[raw.length][];
+		System.arraycopy(raw, 0, result, 0, raw.length);
+		return result;
+	}
 }

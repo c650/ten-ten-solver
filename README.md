@@ -3,10 +3,16 @@
 A framework for developing algorithms to perform efficiently and productively in a game of 10!10!.
 
 ---
-**Authors:** Charles (@c650), Christian (@christiandelacruzmunoz), Arturo (@arturogalan99), and Michael.
+**Authors:** Charles (@c650), Cassandra (@cassdelacruzmunoz), Arturo (@arturogalan99), and Michael.
 
 ---
 # Change Logs:
+
+### Changes Jul 22, 2018:
+
+* Some minor changes to `Board` to improve run speed.
+* added javadoc comments
+
 
 ### Changes Jan 09, 2017:
 

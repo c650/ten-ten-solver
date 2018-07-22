@@ -1,11 +1,12 @@
+package com.palmercodingclub.tentensolver.solutions;
 import java.util.ArrayList;
+import com.palmercodingclub.tentensolver.*;
 
 public class MySolution extends Solution {
 
-	public final String name = "MySolution -- Just Random";
 
-	MySolution() {
-		super();
+	public MySolution() {
+		super("MySolution -- Just Random");
 	}
 
 	public void doMove(ArrayList<Piece> choices) {
@@ -26,5 +27,4 @@ public class MySolution extends Solution {
 		return rand;
 
 	}
-
 };
