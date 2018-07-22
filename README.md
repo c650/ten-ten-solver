@@ -11,7 +11,8 @@ A framework for developing algorithms to perform efficiently and productively in
 ### Changes Jul 22, 2018:
 
 * Some minor changes to `Board` to improve run speed.
-* added javadoc comments
+* Added javadoc comments and generated Javadoc html.
+* Modified tester to run a comparison test of the three different algorithms.
 
 
 ### Changes Jan 09, 2017:

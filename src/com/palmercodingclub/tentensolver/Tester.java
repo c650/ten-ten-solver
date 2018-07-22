@@ -1,6 +1,5 @@
 package com.palmercodingclub.tentensolver;
 import java.util.*;
-import java.lang.Thread;
 import com.palmercodingclub.tentensolver.solutions.*;
 
 public class Tester {

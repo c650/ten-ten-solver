@@ -36,6 +36,7 @@ public class Board {
 
 	/**
 	* Scans the board for completed rows and clears them.
+	* @return the number of rows cleared
 	*/
 	public int scanAndClear() {
 		int cleared = 0;
@@ -160,18 +161,5 @@ public class Board {
 	private void debug(String s) {
 		if (DEBUG)
 			System.out.println(s);
-	}
-	
-	/**
-	* copies the board's values, while creating a new object reference
-	*/
-	public Board copyBoard() {
-		Board result = new Board();
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[i].length; j++) {
-				result.board[i][j]=board[i][j];
-			}
-		}
-		return result;
 	}
 }
