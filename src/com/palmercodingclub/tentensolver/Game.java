@@ -50,7 +50,8 @@ public class Game {
 	* This constructor makes no assumptions and is called by the other constructors.
 	* @param s     which solution class to use
 	* @param pFP   the file where the `Piece` info is stored
-	* @param debug a boolean, dictates whether to print debugging messages or not.
+	* @param debug dictates whether to print debugging messages or not.
+	* @param seed  gives the seed for pseudo random number generation
 	*/
 	public Game(Solution s, String pFP, boolean debug, long seed) {
 
@@ -86,6 +87,7 @@ public class Game {
 
 	/**
 	* Main logic for the game playing
+	* @return gives the final score
 	*/
 	public int play() {
 		if (pieces == null) {
@@ -99,7 +101,7 @@ public class Game {
 				while(i-->0)
 					piecesInPlay.add(pieces[(int)(rng.nextInt(pieces.length))]);
 			}
-			System.out.println(b);
+			//System.out.println(b);
 			if (gameOver()) break;
 
 			/*	The subclass of Solution will handle this!
@@ -111,7 +113,7 @@ public class Game {
 
 			score += b.scanAndClear();
 		}
-		System.out.println("Total Score: " + score);
+		//System.out.println("Total Score: " + score);
 
 		return score;
 	}

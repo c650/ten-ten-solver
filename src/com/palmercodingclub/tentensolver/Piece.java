@@ -28,6 +28,7 @@ public class Piece {
 
 	/**
 	* Returns the values of the piece without handing over the actual array object
+	* @return gives a copy of the 2d boolean array
 	*/
 	public boolean[][] getRaw() {
 		boolean[][] result=new boolean[raw.length][];
