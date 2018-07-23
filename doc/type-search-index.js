@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.palmercodingclub.tentensolver","l":"Solution"}]

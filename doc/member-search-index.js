@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"com.palmercodingclub.tentensolver","c":"Solution","l":"doMove(ArrayList<Piece>)","url":"doMove-java.util.ArrayList-"},{"p":"com.palmercodingclub.tentensolver","c":"Solution","l":"name"},{"p":"com.palmercodingclub.tentensolver","c":"Solution","l":"setBoard(Board)","url":"setBoard-com.palmercodingclub.tentensolver.Board-"}]
