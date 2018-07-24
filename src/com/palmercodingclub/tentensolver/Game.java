@@ -1,13 +1,9 @@
 package com.palmercodingclub.tentensolver;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
-import com.cassdelacruzmunoz.library.ConsoleIO;
-import com.palmercodingclub.tentensolver.solutions.MetaSolution;
 
 public class Game {
 	private final boolean DEBUG;
@@ -68,11 +64,6 @@ public class Game {
 
 		sol = s;
 		sol.setBoard(b);
-		
-		if (sol.name.equals("A combination of various solutions")) {
-			MetaSolution metaSol=(MetaSolution)(sol);
-			metaSol.prepareSolutions();
-		}
 
 		debug("Game initialized");
 		
@@ -110,7 +101,7 @@ public class Game {
 				while(i-->0)
 					piecesInPlay.add(pieces[(int)(rng.nextInt(pieces.length))]);
 			}
-			//UserInput.print(b);
+			//System.out.println(b);
 			if (gameOver()) break;
 
 			/*	The subclass of Solution will handle this!
@@ -118,34 +109,12 @@ public class Game {
 				your choice of logic and/or randomness to
 				solve the puzzle!
 			*/
-			score+=sol.doMove( piecesInPlay );
-			b.scanAndClear();
-		}
-		//UserInput.print("Total Score: " + score);
+			sol.doMove( piecesInPlay );
 
-		return score;
-	}
-	
-	public int playWithPlayer() {
-		if (pieces == null) {
-			System.err.println("No pieces supplied.");
-			System.exit(1);
+			score += b.scanAndClear();
 		}
-		while(true) {
-			if (piecesInPlay.isEmpty()) {
-				getPiecesFromPlayer();
-			}
-			if (gameOver()) break;
+		//System.out.println("Total Score: " + score);
 
-			/*	The subclass of Solution will handle this!
-				You'll implement your own .doMove(...) with
-				your choice of logic and/or randomness to
-				solve the puzzle!
-			*/
-			score+=sol.doMove( piecesInPlay );
-			ConsoleIO.print(b);
-			b.scanAndClear();
-		}
 		return score;
 	}
 
@@ -232,12 +201,6 @@ public class Game {
 	
 	public int getScore() {
 		return score;
-	}
-	
-	private void getPiecesFromPlayer() {
-		for(int i=0;i<3;i++) {
-			piecesInPlay.add(pieces[ConsoleIO.generateMenu("",pieces)]);
-		}
 	}
 
 }

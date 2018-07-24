@@ -1,9 +1,14 @@
 package com.palmercodingclub.tentensolver.solutions;
+<<<<<<< HEAD:src/com/palmercodingclub/tentensolver/solutions/AdjacencySolution.java
 
+=======
+>>>>>>> f415da6935e5207ad64e7bd9c6ea1d41a816bc4f:src/com/palmercodingclub/tentensolver/solutions/AdjacencySolution.java
 import java.util.ArrayList;
 import com.palmercodingclub.tentensolver.Solution;
 import com.palmercodingclub.tentensolver.Piece;
 import com.palmercodingclub.tentensolver.Coordinate;
+
+import com.palmercodingclub.tentensolver.*;
 
 public class AdjacencySolution extends Solution {
 

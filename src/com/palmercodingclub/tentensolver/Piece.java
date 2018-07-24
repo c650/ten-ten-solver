@@ -1,14 +1,11 @@
 package com.palmercodingclub.tentensolver;
-
 public class Piece {
 
 	/* actual incidence matrix for piece  */
 	private final boolean[][] raw;
-	private int score=0;
 
 	public Piece( boolean[][] r  ) {
 		raw = r;
-		calcScore();
 		// raw = new boolean[r.length][];
 		// for (int i = 0, j = 0; i < raw.length; i++) {
 		// 	raw[i] = new boolean[r[i].length];
@@ -37,19 +34,5 @@ public class Piece {
 		boolean[][] result=new boolean[raw.length][];
 		System.arraycopy(raw, 0, result, 0, raw.length);
 		return result;
-	}
-	
-	private void calcScore() {
-		for(int a=0;a<raw.length;a++) {
-			for(int b=0; b<raw[a].length;b++) {
-				if (raw[a][b]) {
-					score++;
-				}
-			}
-		}
-	}
-	
-	public int getScore() {
-		return score;
 	}
 }
