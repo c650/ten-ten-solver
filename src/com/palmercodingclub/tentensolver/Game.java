@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.cassdelacruzmunoz.library.ConsoleIO;
+
 public class Game {
 	private final boolean DEBUG;
 	private static Piece[] pieces;
@@ -89,7 +91,7 @@ public class Game {
 	* Main logic for the game playing
 	* @return gives the final score
 	*/
-	public int play() {
+	public int play(boolean player) {
 		if (pieces == null) {
 			System.err.println("No pieces supplied.");
 			System.exit(1);
@@ -98,8 +100,14 @@ public class Game {
 		while(true) {
 			if (piecesInPlay.isEmpty()) {
 				int i = 3;
-				while(i-->0)
-					piecesInPlay.add(pieces[(int)(rng.nextInt(pieces.length))]);
+				while(i-->0) {
+					if(player) {
+						piecesInPlay.add(pieces[ConsoleIO.generateMenu("", pieces)]);
+					}
+					else {
+						piecesInPlay.add(pieces[(int)(rng.nextInt(pieces.length))]);
+					}
+				}
 			}
 			//System.out.println(b);
 			if (gameOver()) break;

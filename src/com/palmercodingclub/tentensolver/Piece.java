@@ -35,4 +35,15 @@ public class Piece {
 		System.arraycopy(raw, 0, result, 0, raw.length);
 		return result;
 	}
+
+	public int getScore() {
+		// TODO Auto-generated method stub
+		int score=0;
+		for (boolean[] arr : raw) {
+			for (boolean cell : arr) {
+				score+=(cell ? 0 : 1);
+			}
+		}
+		return score;
+	}
 }

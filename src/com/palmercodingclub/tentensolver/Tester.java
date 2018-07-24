@@ -1,19 +1,12 @@
 package com.palmercodingclub.tentensolver;
-<<<<<<< HEAD
 
 import java.util.ArrayList;
-
 import com.cassdelacruzmunoz.library.ConsoleIO;
 import com.cassdelacruzmunoz.library.math.SingleVariableStats;
 import com.palmercodingclub.tentensolver.solutions.AdjacencySolution;
 import com.palmercodingclub.tentensolver.solutions.ImprovedAdjacencySol;
 import com.palmercodingclub.tentensolver.solutions.MetaSolution;
 import com.palmercodingclub.tentensolver.solutions.MySolution;
-=======
-import java.util.*;
-import com.palmercodingclub.tentensolver.solutions.*;
-import cassdelacruzmunoz.StaticticsTools.SingleVariableStats;
->>>>>>> f415da6935e5207ad64e7bd9c6ea1d41a816bc4f
 
 public class Tester {
 	static Solution[] sols;
@@ -21,7 +14,6 @@ public class Tester {
 	static int trials;
 	static String pFP;
 	static SingleVariableStats[] stats;
-<<<<<<< HEAD
 	static long startTime;
 	
 	public static void main(String[] args) {
@@ -34,7 +26,7 @@ public class Tester {
 				break;
 			case 1:
 				Game g = new Game(sols[0], pFP, false);
-				g.playWithPlayer();
+				g.play(true);
 				main(args);
 				break;
 			case 2:
@@ -63,30 +55,6 @@ public class Tester {
 		sols[1]=(Solution)(new ImprovedAdjacencySol());
 		sols[2]=(Solution)(new MySolution());
 		sols[3]=(Solution)(new MetaSolution());
-=======
-	public static void main(String[] args) {
-
-		if (args.length != 2) {
-			System.err.println("Incorrect # of args.");
-			return;
-		}
-		pFP = args[0];
-		trials=Integer.parseInt(args[1]);
-		prepareSolutions();
-		prepareScores();
-		for(int i = 0; i < trials; i++) {
-			runTrial(i);
-		}
-		calculateStats();
-		printStats();
-	}
-	
-	private static void prepareSolutions() {
-		sols = new Solution[3];
-		sols[0]=(Solution)(new AdjacencySolution());
-		sols[1]=(Solution)(new ImporvedAdjacencySol());
-		sols[2]=(Solution)(new MySolution());
->>>>>>> f415da6935e5207ad64e7bd9c6ea1d41a816bc4f
 	}
 	
 	private static void prepareScores() {
@@ -100,7 +68,7 @@ public class Tester {
 		long seed = System.currentTimeMillis();
 		for(int a = 0; a < sols.length; a++) {
 			Game g = new Game(sols[a], pFP, false, seed);
-			g.play();
+			g.play(false);
 			score[a][i]=g.getScore();
 		}
 	}
@@ -113,7 +81,6 @@ public class Tester {
 		}
 	}
 	
-<<<<<<< HEAD
 	private static void printFiveNumSum() {
 		for (int a = 0; a < 5; a++) {
 			System.out.printf("%s\t",stats[0].getAllStatLabels()[4][a]);
@@ -121,14 +88,6 @@ public class Tester {
 				System.out.printf("%5d\t",(int)(stats[b].fiveNumSummary()[a]));
 			}
 			ConsoleIO.print("");
-=======
-	private static void printStats() {
-		for (int a = 0; a < 5; a++) {
-			for (int b=0; b < stats.length; b++) {
-				System.out.print(stats[b].fiveNumSummary()[a]+"    ");
-			}
-			System.out.println("");
->>>>>>> f415da6935e5207ad64e7bd9c6ea1d41a816bc4f
 		}
 	}
 	
