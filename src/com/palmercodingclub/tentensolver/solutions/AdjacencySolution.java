@@ -7,7 +7,6 @@ import com.palmercodingclub.tentensolver.Coordinate;
 
 public class AdjacencySolution extends Solution {
 
-
 	public AdjacencySolution() {
 		super("AdjacencySolution");
 	}

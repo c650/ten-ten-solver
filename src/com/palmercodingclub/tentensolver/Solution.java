@@ -26,7 +26,6 @@ public abstract class Solution {
 	* doMove(...) is the only function that must be implemented.
 	* Note: Valid positions are returned by Board.getAvailableSpots(Piece).
 	* @param choices the various pieces to choose from when playing
-<<<<<<< HEAD
 	* @return the score value of the piece
 	*/
 	public abstract int doMove(ArrayList<Piece> choices);

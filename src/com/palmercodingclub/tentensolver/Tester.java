@@ -14,6 +14,7 @@ public class Tester {
 	static int trials;
 	static String pFP;
 	static SingleVariableStats[] stats;
+
 	static long startTime;
 	
 	public static void main(String[] args) {
@@ -26,7 +27,7 @@ public class Tester {
 				break;
 			case 1:
 				Game g = new Game(sols[0], pFP, false);
-				g.play(true);
+				g.playWithPlayer();
 				main(args);
 				break;
 			case 2:
@@ -47,14 +48,6 @@ public class Tester {
 		calculateStats();
 		printFiveNumSum();
 		ConsoleIO.print("Delta Time: "+(System.currentTimeMillis()-startTime)/1000.0+" seconds");
-	}
-	
-	private static void prepareSolutions() {
-		sols = new Solution[4];
-		sols[0]=(Solution)(new AdjacencySolution());
-		sols[1]=(Solution)(new ImprovedAdjacencySol());
-		sols[2]=(Solution)(new MySolution());
-		sols[3]=(Solution)(new MetaSolution());
 	}
 	
 	private static void prepareScores() {
@@ -88,7 +81,7 @@ public class Tester {
 				System.out.printf("%5d\t",(int)(stats[b].fiveNumSummary()[a]));
 			}
 			ConsoleIO.print("");
-		}
+    }
 	}
 	
 	public static double avg(ArrayList<Integer> arr) {
