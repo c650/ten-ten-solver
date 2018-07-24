@@ -9,13 +9,13 @@ public class MySolution extends Solution {
 		super("MySolution -- Just Random");
 	}
 
-	public void doMove(ArrayList<Piece> choices) {
+	public int doMove(ArrayList<Piece> choices) {
 
 		int pieceIdx = pickPiece(choices);
-
-		ArrayList<Coordinate> spots = b.getAvailableSpots(  choices.get(  pieceIdx  )  );
-		b.placePiece( choices.remove( pieceIdx ) , spots.get((int)(Math.random() * spots.size())) );
-
+		Piece p=choices.remove(pieceIdx);
+		ArrayList<Coordinate> spots = b.getAvailableSpots(  p  );
+		b.placePiece( p , spots.get((int)(Math.random() * spots.size())) );
+		return p.getScore();
 	}
 
 	private int pickPiece(ArrayList<Piece> choices) {
