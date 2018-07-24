@@ -1,5 +1,12 @@
 package com.palmercodingclub.tentensolver.solutions;
+<<<<<<< HEAD:src/com/palmercodingclub/tentensolver/solutions/AdjacencySolution.java
+
+=======
+>>>>>>> f415da6935e5207ad64e7bd9c6ea1d41a816bc4f:src/com/palmercodingclub/tentensolver/solutions/AdjacencySolution.java
 import java.util.ArrayList;
+import com.palmercodingclub.tentensolver.Solution;
+import com.palmercodingclub.tentensolver.Piece;
+import com.palmercodingclub.tentensolver.Coordinate;
 
 import com.palmercodingclub.tentensolver.*;
 
@@ -10,7 +17,7 @@ public class AdjacencySolution extends Solution {
 		super("AdjacencySolution");
 	}
 
-	public void doMove(ArrayList<Piece> choices) {
+	public int doMove(ArrayList<Piece> choices) {
 		final boolean[][] rawBoard = b.getBoard(); /* we're going to scan/traverse the board to count adjacencies. */
 
 		Piece bestPiece = null;
@@ -31,6 +38,7 @@ public class AdjacencySolution extends Solution {
 		}
 		choices.remove(bestPiece);
 		b.placePiece( bestPiece , bestMove );
+		return bestPiece.getScore();
 	}
 
 	private int countCollisions(Piece p, Coordinate atSpot, final boolean[][] rawBoard) {
