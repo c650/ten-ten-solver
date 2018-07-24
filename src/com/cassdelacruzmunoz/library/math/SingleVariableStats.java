@@ -1,4 +1,4 @@
-package cassdelacruzmunoz.StaticticsTools;
+package com.cassdelacruzmunoz.library.math;
 
 public class SingleVariableStats {
 	private double[] data;
@@ -56,6 +56,28 @@ public class SingleVariableStats {
 		result[5][1]=standardDeviation;
 		result[5][2]=iqr;
 		result[5][3]=range;
+		return result;
+	}
+	public String[][] getAllStatLabels() {
+		String[][] result=new String[6][];
+		result[0] = new String[data.length];
+		for(int i=0;i<result[0].length;i++) {
+			result[0][i]="Data point "+(i+1);
+		}
+		result[1] = new String[deviation.length];
+		for(int i=0;i<result[1].length;i++) {
+			result[1][i]="Deviation point "+(i+1);
+		}
+		result[2] = new String[squaredDeviations.length];
+		for(int i=0;i<result[2].length;i++) {
+			result[2][i]="Squred Deviation point "+(i+1);
+		}
+		result[3] = new String[zScores.length];
+		for(int i=0;i<result[3].length;i++) {
+			result[3][i]="Standardized Score point "+(i+1);
+		}
+		result[4]=new String[] {"min","Q1", "median","Q3", "max"};
+		result[5]=new String[] {"mean", "standard deviation", "IQR", "range"};
 		return result;
 	}
 	private void calcFiveNumSummary()

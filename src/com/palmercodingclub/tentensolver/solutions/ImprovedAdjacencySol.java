@@ -1,15 +1,19 @@
 package com.palmercodingclub.tentensolver.solutions;
-import java.util.ArrayList;
-import com.palmercodingclub.tentensolver.*;
 
-public class ImporvedAdjacencySol extends Solution{
+import java.util.ArrayList;
+import com.palmercodingclub.tentensolver.Solution;
+import com.palmercodingclub.tentensolver.Board;
+import com.palmercodingclub.tentensolver.Piece;
+import com.palmercodingclub.tentensolver.Coordinate;
+
+public class ImprovedAdjacencySol extends Solution{
 	
 
-		public ImporvedAdjacencySol() {
+		public ImprovedAdjacencySol() {
 			super("ImprovedAdjacencySolution");
 		}
 
-		public void doMove(ArrayList<Piece> choices) {
+		public int doMove(ArrayList<Piece> choices) {
 			final boolean[][] rawBoard = b.getBoard(); /* we're going to scan/traverse the board to count adjacencies. */
 			
 			Piece bestPiece = null;
@@ -40,14 +44,16 @@ public class ImporvedAdjacencySol extends Solution{
 			if(mostCleared > 0){
 				choices.remove(bestPiece2);
 				b.placePiece( bestPiece2 , bestMove2);
+				return bestPiece2.getScore();
 			}
 			else{
 				choices.remove(bestPiece);
 				b.placePiece( bestPiece , bestMove );
+				return bestPiece.getScore();
 			}
 		}
 		private int countClearable(Piece p, Coordinate atSpot, Board b){
-			Board temp = b;
+			Board temp = b.copyBoard();
 			temp.placePiece(p, atSpot);
 			return temp.scanAndClear();
 		}

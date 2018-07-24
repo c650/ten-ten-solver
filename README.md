@@ -8,6 +8,12 @@ A framework for developing algorithms to perform efficiently and productively in
 ---
 # Change Logs:
 
+### Changes Jul 23, 2018:
+
+* Fixed bug involving `ImprovedAdjacencySol`, `Board`, and passing objects by reference.
+* Refactored library paths.
+* Added support for getting advice from one of the algorithms.
+
 ### Changes Jul 22, 2018:
 
 * Some minor changes to `Board` to improve run speed.

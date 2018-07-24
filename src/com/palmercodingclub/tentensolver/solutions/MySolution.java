@@ -1,6 +1,9 @@
 package com.palmercodingclub.tentensolver.solutions;
+
 import java.util.ArrayList;
-import com.palmercodingclub.tentensolver.*;
+import com.palmercodingclub.tentensolver.Solution;
+import com.palmercodingclub.tentensolver.Piece;
+import com.palmercodingclub.tentensolver.Coordinate;
 
 public class MySolution extends Solution {
 
@@ -9,12 +12,14 @@ public class MySolution extends Solution {
 		super("MySolution -- Just Random");
 	}
 
-	public void doMove(ArrayList<Piece> choices) {
+	public int doMove(ArrayList<Piece> choices) {
 
 		int pieceIdx = pickPiece(choices);
-
-		ArrayList<Coordinate> spots = b.getAvailableSpots(  choices.get(  pieceIdx  )  );
-		b.placePiece( choices.remove( pieceIdx ) , spots.get((int)(Math.random() * spots.size())) );
+		Piece pieceToPlay=choices.remove(pieceIdx);
+		ArrayList<Coordinate> spots = b.getAvailableSpots(  pieceToPlay  );
+		
+		b.placePiece( pieceToPlay , spots.get((int)(Math.random() * spots.size())) );
+		return pieceToPlay.getScore();
 
 	}
 

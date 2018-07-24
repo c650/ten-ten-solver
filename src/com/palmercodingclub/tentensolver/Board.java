@@ -162,4 +162,12 @@ public class Board {
 		if (DEBUG)
 			System.out.println(s);
 	}
+	
+	public Board copyBoard() {
+		Board result=new Board();
+		for(int i=0;i<board.length;i++) {
+			System.arraycopy(board[i], 0, result.board[i], 0, board[i].length);
+		}
+		return result;
+	}
 }
